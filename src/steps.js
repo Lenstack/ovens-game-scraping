@@ -34,7 +34,7 @@ const steps = [
         }
     },
     {
-        name: "wait 15 seconds",
+        name: "waiting 15 seconds",
         run: async (page) => {
             await page.waitForTimeout(15000);
         }
@@ -91,9 +91,12 @@ const steps = [
                     // Click on <button> "OK"
                     await page.waitForSelector(`.swal2-confirm`);
                     await page.click(`.swal2-confirm`);
+
+                    // Take screenshot
+                    //await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
                 }
-                console.log("Waiting 1 minute");
-                await new Promise((resolve) => setTimeout(resolve, 65 * 1000));
+                console.log("Waiting 62 seconds");
+                await new Promise((resolve) => setTimeout(resolve, 62 * 1000));
             }
         }
     },
@@ -106,7 +109,7 @@ const steps = [
 ]
 const options = {
     headless: false,
-    slowMo: 20,
+    slowMo: 25,
 }
 
 const items = [
