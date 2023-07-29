@@ -1,3 +1,6 @@
+const email = process.env.EMAIL;
+const password = process.env.PASSWORD;
+
 const steps = [
     {
         name: "https://profit-pie.com/ovens.php",
@@ -19,14 +22,14 @@ const steps = [
         name: "Fill in login form",
         run: async (page) => {
             await page.waitForSelector('[name="email"]:not([disabled])');
-            await page.type('[name="email"]', 'sela1farm@gmail.com');
+            await page.type('[name="email"]', email);
         }
     },
     {
         name: "Fill in password form",
         run: async (page) => {
             await page.waitForSelector('[name="password"]:not([disabled])');
-            await page.type('[name="password"]', '12079911');
+            await page.type('[name="password"]', password);
             await page.waitForSelector('.btn-primary');
         }
     },
@@ -88,9 +91,8 @@ const steps = [
                     // Click on <button> "OK"
                     await page.waitForSelector(`.swal2-confirm`);
                     await page.click(`.swal2-confirm`);
-
-                    await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
                 }
+                console.log("Waiting 1 minute");
                 await new Promise((resolve) => setTimeout(resolve, 65 * 1000));
             }
         }
@@ -145,5 +147,4 @@ const ovens = [
     {code: 11682}
 ];
 
-module.exports = {steps, options, items}
-
+module.exports = {steps, options, items};

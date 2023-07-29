@@ -1,3 +1,4 @@
+require('dotenv').config();
 const {steps, options, items} = require("./steps");
 const scrapper = require("./scrapper");
 
