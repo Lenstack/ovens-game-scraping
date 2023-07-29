@@ -34,9 +34,9 @@ const steps = [
         }
     },
     {
-        name: "waiting 15 seconds",
+        name: "waiting 20 seconds",
         run: async (page) => {
-            await page.waitForTimeout(15000);
+            await page.waitForTimeout(20000);
         }
     },
     {
@@ -59,7 +59,7 @@ const steps = [
     {
         name: "Take Screenshot",
         run: async (page) => {
-           // await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
+            await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
         },
     },
     {
@@ -96,7 +96,7 @@ const steps = [
 
                 console.log("Waiting 1 seconds");
                 round++;
-                await new Promise((resolve) => setTimeout(resolve,  1000));
+                await new Promise((resolve) => setTimeout(resolve, 1000));
                 console.log(`Round ${round}`);
             }
         }
@@ -104,7 +104,7 @@ const steps = [
     {
         name: "Take Screenshot",
         run: async (page) => {
-          //  await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
+            //  await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
         },
     },
 ]
