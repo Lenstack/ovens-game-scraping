@@ -65,6 +65,7 @@ const steps = [
     {
         name: "Recollection",
         run: async (page) => {
+            let round = 0;
             while (true) {
                 for (let i = 0; i < ovens.length; i++) {
                     const oven = ovens[i];
@@ -95,8 +96,11 @@ const steps = [
                     // Take screenshot
                     //await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
                 }
-                console.log("Waiting 62 seconds");
-                await new Promise((resolve) => setTimeout(resolve, 62 * 1000));
+
+                console.log("Waiting 5 seconds");
+                round++;
+                await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
+                console.log(`Round ${round}`);
             }
         }
     },
