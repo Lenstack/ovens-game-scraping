@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "build": "pkg --targets node14-win-x64 --output dist/ovens-game-scraping.exe src/index.js"
+    "build": "pkg --targets node18-win-x64 --output dist/ovens-scraping-v1.0.0.exe src/index.js"
   },
   "keywords": [],
   "author": "Leonardo Ospina",
