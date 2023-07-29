@@ -110,7 +110,7 @@ const steps = [
 ]
 const options = {
     headless: false,
-    slowMo: 23,
+    slowMo: 25,
 }
 
 const items = [
