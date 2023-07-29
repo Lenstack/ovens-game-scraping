@@ -59,7 +59,7 @@ const steps = [
     {
         name: "Take Screenshot",
         run: async (page) => {
-            await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
+           // await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
         },
     },
     {
@@ -92,14 +92,11 @@ const steps = [
                     // Click on <button> "OK"
                     await page.waitForSelector(`.swal2-confirm`);
                     await page.click(`.swal2-confirm`);
-
-                    // Take screenshot
-                    //await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
                 }
 
-                console.log("Waiting 5 seconds");
+                console.log("Waiting 1 seconds");
                 round++;
-                await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
+                await new Promise((resolve) => setTimeout(resolve,  1000));
                 console.log(`Round ${round}`);
             }
         }
@@ -107,13 +104,13 @@ const steps = [
     {
         name: "Take Screenshot",
         run: async (page) => {
-            await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
+          //  await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
         },
     },
 ]
 const options = {
     headless: false,
-    slowMo: 25,
+    slowMo: 23,
 }
 
 const items = [
