@@ -148,7 +148,19 @@ const ovens = [
     {code: 11678},
     {code: 11679},
     {code: 11680},
-    {code: 11682}
+    {code: 11682},
+    {code: 23104},
+    {code: 23105},
+    {code: 23106},
+    {code: 23107},
+    {code: 23108},
+    {code: 23109},
+    {code: 23110},
+    {code: 23111},
+    {code: 23112},
+    {code: 23114},
+    {code: 23115},
+    {code: 23116},
 ];
 
 module.exports = {steps, options, items};
