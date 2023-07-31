@@ -94,9 +94,9 @@ const steps = [
                     await page.click(`.swal2-confirm`);
                 }
 
-                console.log("Waiting 32 seconds");
+                console.log("Waiting 1 second");
                 round++;
-                await new Promise((resolve) => setTimeout(resolve, 32 * 1000));
+                await new Promise((resolve) => setTimeout(resolve,  1000));
                 console.log(`Round ${round}`);
             }
         }
@@ -110,7 +110,7 @@ const steps = [
 ]
 const options = {
     headless: false,
-    slowMo: 25,
+    slowMo: 24,
 }
 
 const items = [
