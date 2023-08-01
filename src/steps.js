@@ -5,7 +5,7 @@ const steps = [
     {
         name: "https://profit-pie.com/ovens.php",
         run: async (page) => {
-            await page.goto('https://profit-pie.com/ovens.php');
+            await page.goto('https://profit-pie.com/ovens.php', {waitUntil: 'load', timeout: 0});
         },
     },
     {
@@ -57,65 +57,94 @@ const steps = [
         }
     },
     {
-        name: "Take Screenshot",
-        run: async (page) => {
-            await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
-        },
-    },
-    {
         name: "Recollection",
         run: async (page) => {
             let round = 0;
-            while (true) {
-                for (let i = 0; i < ovens.length; i++) {
-                    const oven = ovens[i];
-                    console.log(`Running step: ${oven.code}`);
-
-                    // Click on <a> "Collect 1 pies" and await navigation
-                    await page.waitForSelector(`#btnCollect_${oven.code}`);
-                    await Promise.all([
-                        page.click(`#btnCollect_${oven.code}`),
-                        page.waitForNavigation()
-                    ]);
-
-                    // Click on <button> "OK"
-                    await page.waitForSelector(`.swal2-confirm`);
-                    await page.click(`.swal2-confirm`);
-
-                    // Click on <a> "Bake 1 pies" and await navigation
-                    await page.waitForSelector(`[href="?bake=${oven.code}"]`);
-                    await Promise.all([
-                        page.click(`[href="?bake=${oven.code}"]`),
-                        page.waitForNavigation()
-                    ]);
-
-                    // Click on <button> "OK"
-                    await page.waitForSelector(`.swal2-confirm`);
-                    await page.click(`.swal2-confirm`);
-                }
-
-                console.log("Waiting 1 second");
-                round++;
-                await new Promise((resolve) => setTimeout(resolve,  1000));
+            console.log(`Starting recollection with ${ovens.length} oven`);
+            while (round < 1000) {
                 console.log(`Round ${round}`);
+                for (const oven of ovens) {
+                    try {
+                        const ovenCode = oven.code;
+                        console.log(`Running Recollection: ${ovenCode}`);
+
+                        await page.waitForSelector(`#btnCollect_${ovenCode}`);
+                        await page.$eval(`#btnCollect_${ovenCode}`, el => {
+                            el.click();
+                        });
+
+                        await page.waitForSelector(`.swal2-confirm`);
+                        await page.$eval(`.swal2-confirm`, el => {
+                            el.click();
+                        });
+
+                        await page.waitForSelector(`[href="?bake=${ovenCode}"]`);
+                        await page.$eval(`[href="?bake=${ovenCode}"]`, el => {
+                            el.click();
+                        });
+
+                        await page.waitForSelector(`.swal2-confirm`);
+                        await page.$eval(`.swal2-confirm`, el => {
+                            el.click();
+                        });
+                    } catch (error) {
+                        console.error("An error occurred:", error);
+                    }
+                }
+                console.log("Waiting 1 minute before next round");
+                round++;
+                await new Promise((resolve) => setTimeout(resolve, 60000));
             }
         }
     },
-    {
-        name: "Take Screenshot",
-        run: async (page) => {
-            //  await page.screenshot({path: `screenshots/${new Date().valueOf()}.png`});
-        },
-    },
 ]
+
+const minimal_args = [
+    '--autoplay-policy=user-gesture-required',
+    '--disable-background-networking',
+    '--disable-background-timer-throttling',
+    '--disable-backgrounding-occluded-windows',
+    '--disable-breakpad',
+    '--disable-client-side-phishing-detection',
+    '--disable-component-update',
+    '--disable-default-apps',
+    '--disable-dev-shm-usage',
+    '--disable-domain-reliability',
+    '--disable-extensions',
+    '--disable-features=AudioServiceOutOfProcess',
+    '--disable-hang-monitor',
+    '--disable-ipc-flooding-protection',
+    '--disable-notifications',
+    '--disable-offer-store-unmasked-wallet-cards',
+    '--disable-popup-blocking',
+    '--disable-print-preview',
+    '--disable-prompt-on-repost',
+    '--disable-renderer-backgrounding',
+    '--disable-setuid-sandbox',
+    '--disable-speech-api',
+    '--disable-sync',
+    '--hide-scrollbars',
+    '--ignore-gpu-blacklist',
+    '--metrics-recording-only',
+    '--mute-audio',
+    '--no-default-browser-check',
+    '--no-first-run',
+    '--no-pings',
+    '--no-sandbox',
+    '--no-zygote',
+    '--password-store=basic',
+    '--use-gl=swiftshader',
+    '--use-mock-keychain',
+];
+
 const options = {
     headless: false,
-    slowMo: 24,
+    args: minimal_args
 }
 
 const items = [
     {
-        search: "Gotou Hitori",
+        search: "",
     },
 ]
 
@@ -161,6 +190,17 @@ const ovens = [
     {code: 23114},
     {code: 23115},
     {code: 23116},
+    {code: 29484},
+    {code: 29493},
+    {code: 29495},
+    {code: 29496},
+    {code: 29497},
+    {code: 29498},
+    {code: 29500},
+    {code: 29501},
+    {code: 29503},
+    {code: 29504},
+    {code: 29505},
 ];
 
 module.exports = {steps, options, items};
