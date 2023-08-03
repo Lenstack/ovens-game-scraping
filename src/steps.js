@@ -91,9 +91,9 @@ const steps = [
                         console.error("An error occurred:", error);
                     }
                 }
-                console.log("Waiting 1 minute before next round");
+                console.log("Waiting 1 second before next round");
                 round++;
-                await new Promise((resolve) => setTimeout(resolve, 60000));
+                await new Promise((resolve) => setTimeout(resolve, 1000));
             }
         }
     },
