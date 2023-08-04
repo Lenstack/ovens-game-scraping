@@ -1,5 +1,5 @@
 # Variables
-PKG = npx pkg
+PKG = pkg
 SOURCE_DIR = src
 BUILD_DIR = build
 PLATFORMS = linux mac win
