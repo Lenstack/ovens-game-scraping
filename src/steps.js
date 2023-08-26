@@ -28,8 +28,10 @@ const steps = [
         name: "Submit login form",
         run: async (page) => {
             await page.waitForSelector('.btn-primary');
-            await page.click('.btn-primary');
-            await page.waitForTimeout(5000);
+            await Promise.all([
+                page.click('.btn-primary'),
+                page.waitForNavigation()
+            ]);
         }
     },
     {
