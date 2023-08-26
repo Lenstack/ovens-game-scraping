@@ -3,20 +3,11 @@ const password = process.env.PASSWORD;
 
 const steps = [
     {
-        name: "https://profit-pie.com/ovens.php",
+        name: "https://profit-pie.com/login",
         run: async (page) => {
-            await page.goto('https://profit-pie.com/ovens.php', {waitUntil: 'load', timeout: 0});
+            await page.goto('https://profit-pie.com/login', {waitUntil: 'load', timeout: 0});
+            await page.waitForSelector('body');
         },
-    },
-    {
-        name: "Go to login page",
-        run: async (page) => {
-            await page.waitForSelector('.content_buttons [href="login.php"]');
-            await Promise.all([
-                page.click('.content_buttons [href="login.php"]'),
-                page.waitForNavigation()
-            ]);
-        }
     },
     {
         name: "Fill in login form",
@@ -34,16 +25,11 @@ const steps = [
         }
     },
     {
-        name: "waiting 20 seconds",
-        run: async (page) => {
-            await page.waitForTimeout(20000);
-        }
-    },
-    {
         name: "Submit login form",
         run: async (page) => {
             await page.waitForSelector('.btn-primary');
             await page.click('.btn-primary');
+            await page.waitForTimeout(5000);
         }
     },
     {
