@@ -3,9 +3,9 @@ const password = process.env.PASSWORD;
 
 const steps = [
     {
-        name: "https://profit-pie.com/login",
+        name: "https://profit-pie.com/login.php",
         run: async (page) => {
-            await page.goto('https://profit-pie.com/login', {waitUntil: 'load', timeout: 0});
+            await page.goto('https://profit-pie.com/login.php', {waitUntil: 'load', timeout: 0});
             await page.waitForSelector('body');
         },
     },
